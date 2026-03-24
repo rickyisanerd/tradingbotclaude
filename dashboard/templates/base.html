@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeBot Claude</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <h1>TradeBot Claude</h1>
+        <div class="nav-links">
+            <button onclick="loadSection('overview')" class="active" id="btn-overview">Overview</button>
+            <button onclick="loadSection('positions')" id="btn-positions">Positions</button>
+            <button onclick="loadSection('trades')" id="btn-trades">Trades</button>
+            <button onclick="loadSection('weights')" id="btn-weights">Weights</button>
+            <button onclick="loadSection('health')" id="btn-health">Health</button>
+            <button onclick="loadSection('audit')" id="btn-audit">Audit</button>
+        </div>
+        <div class="actions">
+            <button onclick="triggerScan()" class="btn-action">Run Scan</button>
+            <button onclick="triggerRefresh()" class="btn-action btn-secondary">Refresh Signals</button>
+        </div>
+    </nav>
+
+    <main id="content">
+        <div class="loading">Loading...</div>
+    </main>
+
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
