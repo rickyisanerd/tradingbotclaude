@@ -1,6 +1,8 @@
 """Tests for buy gate checks."""
 
 from unittest.mock import patch
+
+from bot.gate_check import check_gates
 from bot.scoring import ScoredCandidate
 
 
@@ -20,7 +22,6 @@ def _make_candidate(final=0.7, risk=0.5, ds=0.4, rr=2.5, dv=1_000_000):
 @patch("bot.gate_check.is_pdt_restricted", return_value=False)
 @patch("bot.gate_check.get_buying_power", return_value=10_000)
 def test_all_gates_pass(mock_bp, mock_pdt):
-    from bot.gate_check import check_gates
     c = _make_candidate()
     result = check_gates(c)
     assert result.passed is True
@@ -31,7 +32,6 @@ def test_all_gates_pass(mock_bp, mock_pdt):
 @patch("bot.gate_check.is_pdt_restricted", return_value=False)
 @patch("bot.gate_check.get_buying_power", return_value=10_000)
 def test_low_score_fails(mock_bp, mock_pdt):
-    from bot.gate_check import check_gates
     c = _make_candidate(final=0.3)
     result = check_gates(c)
     assert result.passed is False
@@ -41,7 +41,6 @@ def test_low_score_fails(mock_bp, mock_pdt):
 @patch("bot.gate_check.is_pdt_restricted", return_value=True)
 @patch("bot.gate_check.get_buying_power", return_value=10_000)
 def test_pdt_restricted_fails(mock_bp, mock_pdt):
-    from bot.gate_check import check_gates
     c = _make_candidate()
     result = check_gates(c)
     assert result.passed is False
